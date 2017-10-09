@@ -15,10 +15,10 @@ def setProbWord(file):
         words = text.split(' ')
         for word in words:
             separated = word.split('_')
-            database.addProbWord(separated[0].lower())
+            database.addCountWord(separated[0].lower())
 
 
 
 separateLines(train,trainTexts)
 setProbWord(trainTexts)
-print(database.probWords)
+database.probForWords()
