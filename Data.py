@@ -44,6 +44,10 @@ class Data():
 
         print("batata")
 
+
+    def printBigram(self,word,labelWord,previousLabel):
+        print(word,labelWord,previousLabel)
+
     # def probabilityForLabels(self, words, label):
     #     for word in words:
     #         probabilityLabels = dict()
