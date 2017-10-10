@@ -24,6 +24,17 @@ def setLabelCount(file):
             separated = word.split('_')
             database.countLabelForWord(separated[0].lower(),separated[1].lower())
 
+def chooseBigramFromText(file):
+    for text in file:
+        words = text.split(' ')
+        for wordNumber in range(0 , len(words)):
+            separated = words[wordNumber].split('_')
+            if wordNumber == 0:
+                database.createBigrams(separated[0],separated[1],"empty")
+            else:
+
+
+
 
 separateLines(train,trainTexts) # Separando arquivo
 setProbWord(trainTexts) # Calculando a contagem de cada palavra (pode ser útil)
