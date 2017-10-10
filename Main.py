@@ -28,7 +28,7 @@ def setLabelCount(file):
 separateLines(train,trainTexts) # Separando arquivo
 setProbWord(trainTexts) # Calculando a contagem de cada palavra (pode ser útil)
 setLabelCount(trainTexts) # Calculando a contagem das labels de cada palavra
-database.probabilityLabelForWord()
+database.probabilityLabelForWord() # Calculando probabilidade para a label de cada palavra
 print(database.probabilityWordsLabels["a"])
 # print(database.countWordLabels['jersei'])
 # print(len(database.countWordLabels))
