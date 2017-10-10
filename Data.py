@@ -4,6 +4,7 @@ class Data():
     probabilityWordsLabels = dict()
 
     countWordLabels = dict()
+    bigrams = dict()
 
     totalWords = 0
 
@@ -38,6 +39,10 @@ class Data():
                         self.probabilityWordsLabels[word][label] = self.countWordLabels[word][label]/total
                 else:
                     self.probabilityWordsLabels[word] = {label: self.countWordLabels[word][label]/total}
+
+    def createBigrams(self,word,labelWord,previousLabel):
+        
+        print("batata")
 
     # def probabilityForLabels(self, words, label):
     #     for word in words:
