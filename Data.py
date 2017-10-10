@@ -2,6 +2,8 @@ class Data():
 
     probabilityWords = dict()
     probabilityWordsLabels = dict()
+
+    countWordLabels = dict()
     totalWords = 0
 
     def addCountWord(self,word):
@@ -17,7 +19,13 @@ class Data():
             self.probabilityWords[word] = self.probabilityWords[word]/self.totalWords
 
 
-    def probabilityForLabels(self, words, labels):
+    def countLabelForWord(self,word,label):
+        if not self.countWordLabels.has_key(word):
+            internDict[label] = 1
+            self.countWordLabels[word] = internDict
+
+
+    def probabilityForLabels(self, words, label):
         for word in words:
             probabilityLabels = dict()
             for label in labels:
