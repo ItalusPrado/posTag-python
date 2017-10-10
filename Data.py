@@ -40,13 +40,6 @@ class Data():
                 else:
                     self.probabilityWordsLabels[word] = {label: self.countWordLabels[word][label]/total}
 
-    def createBigrams(self,word,labelWord,previousLabel):
-
-        print("batata")
-
-
-    def printBigram(self,word,labelWord,previousLabel):
-        print(word,labelWord,previousLabel)
 
     # def probabilityForLabels(self, words, label):
     #     for word in words:
