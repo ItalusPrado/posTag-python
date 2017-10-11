@@ -44,16 +44,21 @@ class Data():
     test = dict()
     organizedBigrams = dict()
     countedBigrams = dict()
+    countedLabelsBigrams = dict()
+    probabilityLabels = dict()
+
 
     def __init__(self, file):
-        self.train = self.separateLines(file)
-        self.organizedBigrams = self.organizeBigrams(self.train)
-        self.countedBigrams = self.countBigrams(self.organizedBigrams)
+        self.train = self.getSeparatedLines(file)
+        self.organizedBigrams = self.getOrganizedBigrams(self.train)
+        self.countedBigrams = self.getCountedBigrams(self.organizedBigrams)
+        self.countedLabelsBigrams = self.getCountedLabelsBigrams(self.organizedBigrams)
+        self.probabilityLabels = self.getProbabilityLabels(self.countedBigrams, self.countedLabelsBigrams)
 
     def setTest(self, test):
         self.test = test
 
-    def separateLines(self, file):
+    def getSeparatedLines(self, file):
         empty = 'empty_EMPTY'
         dictionary = dict()
         content = file.readlines()
@@ -78,7 +83,7 @@ class Data():
 
         return dictionary
 
-    def organizeBigrams(self, dictionary):
+    def getOrganizedBigrams(self, dictionary):
         bigramDictionary = dict()
 
         for i in range(0, len(dictionary)):
@@ -94,7 +99,7 @@ class Data():
 
         return bigramDictionary
 
-    def countBigrams(self, dictionary):
+    def getCountedBigrams(self, dictionary):
 
         tableDictionary = dict()
 
@@ -106,7 +111,41 @@ class Data():
                 else:
                     tableDictionary[key] = 1
 
+        print(tableDictionary)
+
         return tableDictionary
+
+    def getCountedLabelsBigrams(self, dictionary):
+
+        labelsDictionary = dict()
+
+        for i in range(0,len(dictionary)):
+            for labels in dictionary[i]:
+                firstTag = labels[0]
+                if firstTag in labelsDictionary:
+                    labelsDictionary[firstTag] = labelsDictionary[firstTag] + 1
+                else:
+                    labelsDictionary[firstTag] = 1
+
+        print(labelsDictionary)
+
+        return labelsDictionary
+
+    def getProbabilityLabels(self, bigrams, labels):
+
+        dictionary = dict()
+
+        for bigram in bigrams:
+            firstTag = bigram.split(',')[0]
+            probability = bigrams[bigram]/labels[firstTag]
+            key = "%s / %s" % (bigram, firstTag)
+            # print(key)
+            # print(probability)
+            dictionary[key] = probability
+
+        print(dictionary)
+
+        return dictionary
 
 
 
