@@ -6,7 +6,33 @@ class Data():
     countWordLabels = dict()
     bigrams = dict()
 
+    countWordForLabel = dict() # Contagem de P(X/Y)
+    probabilityWordForLabel = dict() # Probabilidade de P(X/Y)
+
     totalWords = 0
+
+    def setCountForLabel(self,word,label):
+        if label in self.countWordForLabel:
+            if word in self.countWordForLabel[label]:
+                self.countWordForLabel[label][word] = self.countWordForLabel[label][word] + 1
+            else:
+                self.countWordForLabel[label][word] = 1
+        else:
+            self.countWordForLabel[label] = {word: 1}
+
+    def setProbForLabel(self):
+        for label in self.countWordForLabel:
+            total = 0
+            for word in self.countWordForLabel[label]:
+                total += self.countWordForLabel[label][word]
+            for word in self.countWordForLabel[label]:
+                if label in self.probabilityWordForLabel:
+                        self.probabilityWordForLabel[label][word] = self.countWordForLabel[label][word]/total
+                else:
+                    self.probabilityWordForLabel[label] = {word : self.countWordForLabel[label][word]/total}
+
+    # ---------------------------- DAQUI PRA BAIXO TÁ ERRADO -----------------------
+
 
     # Talvez seja inutil
     def addCountWord(self,word):
@@ -47,6 +73,14 @@ class Data():
 
     def printBigram(self,word,labelWord,previousLabel):
         print(word,labelWord,previousLabel)
+
+
+    # def viterbi(self,sentence):
+    #     words = sentence.split(' ')
+    #     for word in words:
+
+
+
 
     # def probabilityForLabels(self, words, label):
     #     for word in words:
