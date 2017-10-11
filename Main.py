@@ -1,9 +1,9 @@
 from Data import Data
 
-train = open("train2.txt", encoding="utf8")
+train = open("train.txt", encoding="utf8")
 database = Data(train)
-
 database.separateLines(train)
+print(database.countedBigrams)
 # database.setCountAndProbForLabel()
 # print(database.countLabels)
 

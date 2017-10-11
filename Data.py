@@ -76,8 +76,6 @@ class Data():
 
             dictionary[i] = array
 
-        print(dictionary)
-
         return dictionary
 
     def organizeBigrams(self, dictionary):
@@ -94,8 +92,6 @@ class Data():
 
             bigramDictionary[i] = table
 
-        print(bigramDictionary)
-
         return bigramDictionary
 
     def countBigrams(self, dictionary):
@@ -103,18 +99,12 @@ class Data():
         tableDictionary = dict()
 
         for i in range(0,len(dictionary)):
-            labelDictionary = dict()
-
             for labels in dictionary[i]:
                 key = "%s, %s" % (labels[0], labels[1])
-                if key in dictionary:
-                    labelDictionary[key] = labelDictionary[key] + 1
+                if key in tableDictionary:
+                    tableDictionary[key] = tableDictionary[key] + 1
                 else:
-                    labelDictionary[key] = 1
-
-            tableDictionary[i] = labelDictionary
-
-        print(tableDictionary)
+                    tableDictionary[key] = 1
 
         return tableDictionary
 
