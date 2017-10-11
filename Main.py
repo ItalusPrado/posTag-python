@@ -1,21 +1,15 @@
 from Data import Data
 
 train = open("train.txt", encoding="utf8")
-database = Data()
+database = Data(train)
 
-trainTexts = [] # Array com cada texto
+database.separateLines(train)
+database.setCountAndProbForLabel()
 
-def separateLines(file,array):
-    content = file.readlines()
-    for line in range(0, len(content)):
-        array.append(content[line])
+# print(database.train)
+# print(database.countLabels)
 
-def setWordProbForLabel(file):
-    for text in file:
-        words = text.split(' ')
-        for word in words:
-            separated = word.split('_')
-            database.setCountForLabel(separated[0].lower(),separated[1])
+################### NÃO SEI MAIS NADA AÍ DEBAIXO ######################
 
 
 # def setProbWord(file):
@@ -46,13 +40,13 @@ def setWordProbForLabel(file):
 
 
 
-separateLines(train,trainTexts) # Separando arquivo
-setWordProbForLabel(trainTexts) # Calculando P(X / Y)
-database.setProbForLabel()
-
-
-
-print(database.probabilityWordForLabel)
+# database.separateLines(train) # Separando arquivo
+# setWordProbForLabel(database.train) # Calculando P(X / Y)
+# database.setProbForLabel()
+#
+#
+# print(database.countWordForLabel)
+# print(database.probabilityWordForLabel)
 
 # setProbWord(trainTexts) # Calculando a contagem de cada palavra (pode ser útil)
 # setLabelCount(trainTexts) # Calculando a contagem das labels de cada palavra
@@ -61,3 +55,14 @@ print(database.probabilityWordForLabel)
 # # print(database.probabilityWordsLabels["a"])
 # # print(database.countWordLabels['jersei'])
 # # print(len(database.countWordLabels))
+
+def chooseBigramFromText(file):
+    for text in file:
+        words = text.split(' ')
+        for wordNumber in range(0 , len(words)):
+            separated = words[wordNumber].split('_')
+            if wordNumber == 0:
+                print(separated[0], separated[1], "empty")
+            else:
+                lastWord = words[wordNumber-1].split('_')
+                print(separated[0], separated[1], lastWord[1])
