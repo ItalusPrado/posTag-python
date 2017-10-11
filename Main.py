@@ -1,12 +1,10 @@
 from Data import Data
 
-train = open("train.txt", encoding="utf8")
+train = open("train2.txt", encoding="utf8")
 database = Data(train)
 
 database.separateLines(train)
-database.setCountAndProbForLabel()
-
-# print(database.train)
+# database.setCountAndProbForLabel()
 # print(database.countLabels)
 
 ################### NÃO SEI MAIS NADA AÍ DEBAIXO ######################

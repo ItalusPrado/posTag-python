@@ -37,52 +37,87 @@ class Data():
                 else:
                     self.probabilityWordForLabel[label] = {word : self.countWordForLabel[label][word]/total}
 
-    # ---------------------------- DAQUI PRA BAIXO TÁ ERRADO -----------------------
+    word = 0
+    tag = 1
 
-    train = []
-    test = []
-
-    countLabels = dict()
+    train = dict()
+    test = dict()
+    organizedBigrams = dict()
+    countedBigrams = dict()
 
     def __init__(self, file):
         self.train = self.separateLines(file)
-        self.countLabels = self.createCountLabels(self.train)
+        self.organizedBigrams = self.organizeBigrams(self.train)
+        self.countedBigrams = self.countBigrams(self.organizedBigrams)
 
     def setTest(self, test):
         self.test = test
 
     def separateLines(self, file):
-        array = []
+        empty = 'empty_EMPTY'
+        dictionary = dict()
         content = file.readlines()
         for i in range(0, len(content)):
             line = content[i].splitlines()
-            for j in range(0, len(line)):
-                word = line[j].split(' ')
-                for h in range(0, len(word)):
-                    final = word[h].split('_')
-                    final[0] = final[0].lower()
-                    array.append(final)
 
-        return array
+            dictionary[i] = line[0].split(' ')
+            dictionary[i].append(empty)
+            dictionary[i].insert(0, empty)
 
-    def createCountLabels(self, array):
-        tag = 1
-        table = []
-        for i in range(0, len(array)-1):
-            value = []
-            value.append(array[i][tag])
-            value.append(array[i + 1][tag])
-            table.append(value)
+            array = []
+            for j in range(0, len(dictionary[i])):
+                word = dictionary[i][j].split('_')
 
-        dictionary = dict()
-        for labels in table:
-            key = "%s, %s" % (labels[0], labels[1])
-            if key in dictionary:
-                dictionary[key] = dictionary[key] + 1
-            else:
-                dictionary[key] = 1
+                newList = []
+                for w in word:
+                    newList.append(w.lower())
+
+                array.append(newList)
+
+            dictionary[i] = array
+
+        print(dictionary)
 
         return dictionary
+
+    def organizeBigrams(self, dictionary):
+        bigramDictionary = dict()
+
+        for i in range(0, len(dictionary)):
+            table = []
+
+            for j in range(0,len(dictionary[i])-1):
+                value = []
+                value.append(dictionary[i][j][self.tag])
+                value.append(dictionary[i][j + 1][self.tag])
+                table.append(value)
+
+            bigramDictionary[i] = table
+
+        print(bigramDictionary)
+
+        return bigramDictionary
+
+    def countBigrams(self, dictionary):
+
+        tableDictionary = dict()
+
+        for i in range(0,len(dictionary)):
+            labelDictionary = dict()
+
+            for labels in dictionary[i]:
+                key = "%s, %s" % (labels[0], labels[1])
+                if key in dictionary:
+                    labelDictionary[key] = labelDictionary[key] + 1
+                else:
+                    labelDictionary[key] = 1
+
+            tableDictionary[i] = labelDictionary
+
+        print(tableDictionary)
+
+        return tableDictionary
+
 
 
 #################### ANTIGO TUDO QUE ESTÁ ABAIXO #################
