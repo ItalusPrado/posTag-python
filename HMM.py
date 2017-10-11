@@ -9,7 +9,7 @@ class HMM():
                   [0.3,0.3,0.4], # P(t/verbo)
                   [0,5,0.1,0.4], # P(t/subs)
                   [0.1,0.6,0.2]] # P(t/prep)
-    probTests2 =
+    # probTests2 =
 
     def __init__(self,text):
         self.text = text.rstrip()
@@ -21,4 +21,11 @@ class HMM():
             print(separated)
             self.word.append(separated[0])
             self.tag.append(separated[1])
+# =======
+# import Data as Data
+#
+# class HMM():
+#
+#     bigrams = dict()
+# >>>>>>> 461ba400f1e4f13926ea366cd9e81067d3032eb3
 

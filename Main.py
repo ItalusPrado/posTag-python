@@ -4,14 +4,13 @@ from HMM import HMM
 train = open("train2.txt", encoding="utf8")
 test = open("test.txt",encoding="utf8")
 database = Data(train)
-database.separateLines(train)
+# database.separateLines(train)
 print(database.countedBigrams)
 
 text = test.readlines()[0]
 print(text)
 
 hmm = HMM(text)
-
 # database.setCountAndProbForLabel()
 # print(database.countLabels)
 
