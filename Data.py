@@ -1,4 +1,44 @@
 class Data():
+    probabilityWords = dict()
+    probabilityWordsLabels = dict()
+
+    countWordLabels = dict()
+    bigrams = dict()
+
+    countWordForLabel = dict()  # Contagem de P(X/Y)
+    probabilityWordForLabel = dict()  # Probabilidade de P(X/Y)
+
+    totalWords = 0
+
+    def setCountAndProbForLabel(self):
+        for word in self.train:
+           self.setCountForLabel(word[0], word[1])
+
+        self.setProbForLabel()
+
+    def setCountForLabel(self, word, label):
+
+        if label in self.countWordForLabel:
+
+            if word in self.countWordForLabel[label]:
+                self.countWordForLabel[label][word] = self.countWordForLabel[label][word] + 1
+            else:
+                self.countWordForLabel[label][word] = 1
+        else:
+            self.countWordForLabel[label] = {word: 1}
+
+    def setProbForLabel(self):
+
+        for label in self.countWordForLabel:
+            total = 0
+            for word in self.countWordForLabel[label]:
+                total += self.countWordForLabel[label][word]
+
+            for word in self.countWordForLabel[label]:
+                if label in self.probabilityWordForLabel:
+                    self.probabilityWordForLabel[label][word] = self.countWordForLabel[label][word] / total
+                else:
+                    self.probabilityWordForLabel[label] = {word: self.countWordForLabel[label][word] / total}
 
     word = 0
     tag = 1
@@ -8,10 +48,15 @@ class Data():
     countedBigrams = dict()
     countedLabelsBigrams = dict()
     probabilityLabels = dict()
-
+    countedWords = dict()
+    probabilityWords = dict()
 
     def __init__(self, file, type):
-        self.data = self.getSeparatedLines(file)
+        self.data = self.getSeparatedLines(file, type)
+
+        if type == 'test':
+            self.countedWords = self.getCountedWords(self.data)
+            self.probabilityWords = self.getProbabilityWords(self.data,self.countedWords)
 
         if type == 'train':
             self.organizedBigrams = self.getOrganizedBigrams(self.data)
@@ -23,7 +68,7 @@ class Data():
     def getTestData(self):
         return self.data
 
-    def getSeparatedLines(self, file):
+    def getSeparatedLines(self, file, type):
         empty = 'empty_EMPTY'
         dictionary = dict()
         content = file.readlines()
@@ -31,8 +76,9 @@ class Data():
             line = content[i].splitlines()
 
             dictionary[i] = line[0].split(' ')
-            dictionary[i].append(empty)
-            dictionary[i].insert(0, empty)
+            if type == 'train':
+                dictionary[i].append(empty)
+                dictionary[i].insert(0, empty)
 
             array = []
             for j in range(0, len(dictionary[i])):
@@ -46,7 +92,7 @@ class Data():
 
             dictionary[i] = array
 
-        print(dictionary)
+        # print(dictionary)
 
         return dictionary
 
@@ -78,7 +124,7 @@ class Data():
                 else:
                     tableDictionary[key] = 1
 
-        print(tableDictionary)
+        # print(tableDictionary)
 
         return tableDictionary
 
@@ -94,7 +140,7 @@ class Data():
                 else:
                     labelsDictionary[firstTag] = 1
 
-        print(labelsDictionary)
+        # print(labelsDictionary)
 
         return labelsDictionary
 
@@ -110,6 +156,57 @@ class Data():
             # print(probability)
             dictionary[key] = probability
 
-        print(dictionary)
+        # print(dictionary)
 
         return dictionary
+
+    def getCountedWords(self,dictionary):
+        wordsDictionary = dict()
+
+        for i in range(0, len(dictionary)):
+            for bigram in dictionary[i]:
+                word = bigram[self.word]
+
+                if word in wordsDictionary:
+                    wordsDictionary[word] = wordsDictionary[word] + 1
+                else:
+                    wordsDictionary[word] = 1
+
+        # print(wordsDictionary)
+
+        return wordsDictionary
+
+    # #{'corre': {'v': 3, 's': 5}}
+    def getProbabilityWords(self, dictionary, countedWords):
+        wordsDictionary = dict()
+
+        for i in range(0, len(dictionary)):
+            for bigram in dictionary[i]:
+                word = bigram[self.word]
+                tag = bigram[self.tag]
+
+                wordDictionary = dict()
+                wordsDictionary[word] = wordDictionary
+
+        for word in wordsDictionary:
+            for j in range(0, len(dictionary)):
+                for bigram in dictionary[j]:
+                    bigramWord = bigram[self.word]
+                    label = bigram[self.tag]
+
+                    if bigramWord == word:
+                        if len(wordsDictionary[word]) != 0:
+                            if label in wordsDictionary[word]:
+                                wordsDictionary[word][label] = wordsDictionary[word][label] + 1
+                            else:
+                                wordsDictionary[word][label] = 1
+                        else:
+                            wordsDictionary[word][label] = 1
+
+        for word in wordsDictionary:
+            for label in wordsDictionary[word]:
+                wordsDictionary[word][label] = wordsDictionary[word][label]/countedWords[word]
+
+        print(wordsDictionary)
+
+        return wordsDictionary
