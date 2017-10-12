@@ -1,13 +1,16 @@
 from Data import Data
 from DataManager import DataManager
+from NewHMM import NewHMM
 
-train = open("train.txt", encoding="utf8")
+train = open("test.txt", encoding="utf8")
 
 dataManager = DataManager(train)
 dataManager.setCountAndProbForLabel()
-print(dataManager.countWordForLabel["N"])
-print(dataManager.probWordForLabel["N"])
+print(dataManager.countWordForLabel["pcp"])
+# print(dataManager.probWordForLabel["n"])
 
+hmm = NewHMM(dataManager.probWordForLabel)
+hmm.startSearch()
 
 
 

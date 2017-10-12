@@ -17,6 +17,7 @@ class DataManager():
                 for h in range(0, len(word)):
                     final = word[h].split('_')
                     final[0] = final[0].lower()
+                    final[1] = final[1].lower()
                     array.append(final)
 
         return array
