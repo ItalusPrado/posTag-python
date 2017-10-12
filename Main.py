@@ -1,14 +1,30 @@
 from Data import Data
-from HMM import HMM
+from DataManager import DataManager
 
-print('Train data:')
-train = open("train2.txt", encoding="utf8")
-databaseTrain = Data(train, 'train')
+train = open("train.txt", encoding="utf8")
 
-print('\nTest data:')
-test = open("test2.txt",encoding="utf8")
-databaseTest = Data(test, 'test')
+dataManager = DataManager(train)
+dataManager.setCountAndProbForLabel()
+print(dataManager.countWordForLabel["N"])
+print(dataManager.probWordForLabel["N"])
 
-hmm = HMM(databaseTest.getTestData())
-# print(hmm.data[200])
-# hmm.startSearch()
+
+
+
+
+
+
+
+# from HMM import HMM
+#
+# print('Train data:')
+# # train = open("train.txt", encoding="utf8")
+# # databaseTrain = Data(train, 'train')
+#
+# print('\nTest data:')
+# test = open("test.txt",encoding="utf8")
+# databaseTest = Data(test, 'test')
+#
+# # hmm = HMM(databaseTest.getTestData())
+# # print(hmm.data[200])
+# # hmm.startSearch()
