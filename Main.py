@@ -11,6 +11,7 @@ text = test.readlines()[0]
 print(text)
 
 hmm = HMM(text)
+hmm.startSearch()
 # database.setCountAndProbForLabel()
 # print(database.countLabels)
 
