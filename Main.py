@@ -2,8 +2,12 @@ from Data import Data
 from DataManager import DataManager
 from NewHMM import NewHMM
 
-train = open("test.txt", encoding="utf8")
+train = open("train.txt", encoding="utf8")
+trainData = Data(train)
+probabilityLabels = trainData.probabilityLabels
+print(probabilityLabels)
 
+train = open("test.txt", encoding="utf8")
 dataManager = DataManager(train)
 dataManager.setCountAndProbForLabel()
 print(dataManager.countWordForLabel["pcp"])
@@ -15,19 +19,14 @@ hmm.startSearch()
 
 
 
-
-
-
 # from HMM import HMM
 #
 # print('Train data:')
-# # train = open("train.txt", encoding="utf8")
-# # databaseTrain = Data(train, 'train')
-#
+# train = open("train.txt", encoding="utf8")
+# databaseTrain = Data(train, 'train')
+
 # print('\nTest data:')
 # test = open("test.txt",encoding="utf8")
-# databaseTest = Data(test, 'test')
-#
-# # hmm = HMM(databaseTest.getTestData())
+# hmm = HMM(train)
 # # print(hmm.data[200])
 # # hmm.startSearch()

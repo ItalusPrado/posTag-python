@@ -1,4 +1,6 @@
 from Node import Node
+from DataManager import DataManager
+from Tag import Tag
 
 class HMM():
 
@@ -9,7 +11,7 @@ class HMM():
     board = []
     path = []
 
-    tags = ['pcp','pden','cur','prep','prep+prosub','ks','adv-ks','prep+adv','pro-ks','num','prosub','adv','proadj','nprop','pu','propess','prep+art','adj','v','n','art','prep+propess','in','prep+pro-ks','prep+proadj','kc']
+    tags = Tag().all()
 
     probTests1 = [[0.2,0.4,0.4], # P(t/vazio)
                   [0.3,0.5,0.2], # P(t/verbo)
@@ -19,8 +21,11 @@ class HMM():
     probTests2 = [[0.0,0.7,0.3], # Palavra Ela = verbo 0.0 ; subs 0.7 ; prep 0.3
                   [0.6,0.2,0.2]] # Palavra Corre = verbo 0.6 ; subs 0.2 ; prep 0.2
 
-    def __init__(self,data):
-        self.data = data
+    probabilityWords = dict()
+
+    def __init__(self,text):
+        self.text = text
+        # self.separateText()
 
     def separateText(self):
         for word in self.text.split(' '):

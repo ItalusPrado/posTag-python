@@ -1,18 +1,1 @@
-Salto_N sete_ADJ a_N a_N a_N Salto_N Salto_ADJ
-O_ART grande_ADJ assunto_N da_PREP+ART semana_N em_PREP Nova_NPROP York_NPROP é_V a_ART edição_N da_PREP+ART revista_N "_PU New_NPROP Yorker_NPROP "_PU que_PRO-KS está_V nas_PREP+ART bancas_N ._PU
-Número_N duplo_ADJ especial_ADJ ,_PU é_V inteirinho_ADJ dedicado_PCP a_PREP ensaios_N sobre_PREP moda_N ._PU
-A_ART endiabrada_PCP editora_N Tina_NPROP Brown_NPROP ex_N da_PREP+ART "_PU Vanity_NPROP Fair_NPROP -_PU convocou_V até_PDEN John_NPROP Updike_NPROP e_KC Salman_NPROP Rushdie_NPROP para_PREP discorrer_V sobre_PREP o_ART tema_N ._PU
-Além_PREP das_PREP+ART fotos_N de_PREP Richard_NPROP Avedon_NPROP ._PU
-Terragran_NPROP ;_PU Hemocentro_N
-Terragran_NPROP
-Os_ART convidados_N de_PREP Olavo_NPROP Monteiro_NPROP de_NPROP Carvalho_NPROP para_PREP acompanhar_V -lo_PROPESS no_PREP+ART weekend_N em_PREP São_NPROP Paulo_NPROP não_ADV acreditaram_V no_PREP+ART fôlego_N do_PREP+ART rapaz_N ._PU
-Ele_PROPESS percorreu_V todo_PROADJ aquele_PROADJ circuito_N tipo_N Bienal_NPROP ,_PU final_N do_PREP+ART vôlei_N ,_PU Salão_NPROP do_NPROP Automóvel_NPROP com_PREP direito_N até_PDEN à_PREP+ART exposição_N de_PREP mesas_N decoradas_PCP ._PU
-Hemocentro_N
-Para_PREP seu_PROADJ novo_ADJ filme_N "_PU Olhos_NPROP de_NPROP Vampa_NPROP "_PU que_PRO-KS começou_V a_PREP rodar_V domingo_N passado_PCP em_PREP São_NPROP Paulo_NPROP -_PU ,_PU o_ART cineasta_N Walter_NPROP Rogério_NPROP o_ART já_ADV cult_ADJ "_PU Beijo_NPROP 2342/72_NPROP -_PU sondou_V Marilia_NPROP Gabriela_NPROP para_PREP uma_ART participação_N especial_ADJ ._PU
-Com_PREP Christiane_NPROP Tricerri_NPROP e_KC Antonio_NPROP Abujamra_NPROP nos_PREP+ART papéis_N principais_ADJ ,_PU trata_V -se_PROPESS de_PREP um_ART thriller_N vampiresco_ADJ ._PU
-Só_PDEN que_KS o_ART "_PU morcego_N "_PU ataca_V as_ART moças_N só_PDEN pela_PREP+ART retaguarda_N ._PU
-Grande_ADJ angular_N
-Agora_KS que_KS não_ADV anda_V mais_ADV tão_ADV assim_ADV com_PREP Roberto_NPROP Marinho_NPROP ,_PU Arthur_NPROP Falk_NPROP resolveu_V ampliar_V os_ART horizontes_N ._PU
-Seguindo_V a_ART linha_N do_PREP+ART mestre_N ,_PU está_V agora_ADV atrás_PREP de_PREP um_ART canal_N de_PREP TV_N ._PU
-Estragão_N
-O_ART circuito_N das_PREP+ART caçarolas_N chic_ADJ da_PREP+ART cidade_N está_V fervendo_V ._PU
+dedicado_N dedicado_N dedicado_PCP dedicado_V gabriel_N gabriel_V gabriel_PCP gabriel_PU
