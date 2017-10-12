@@ -30,7 +30,7 @@ class HMM():
             self.tag.append(separated[1])
 
     def startSearch(self):
-        node = Node(None,self.tags[0],1,1,0)
+        node = Node(None,self.tags[0],1,1,1,0)
         self.board.append(node)
         self.expandTree()
 
@@ -55,13 +55,9 @@ class HMM():
 
         a = 0
         print("--- Atual ---", actualNode.currentValue, actualNode.tag)
-        # if actualNode.father == None:
-        #     print(actualNode.tag, actualNode.depth, "empty")
-        # else:
-        #     print(actualNode.tag, actualNode.depth, actualNode.father.tag)
         if actualNode.depth < len(self.word):
             for prob in self.probTests1[self.tags.index(actualNode.tag)]:
-                newNode = Node(actualNode,self.tags[a+1],prob,actualNode.currentValue,actualNode.depth+1)
+                newNode = Node(actualNode,self.tags[a+1],prob,actualNode.currentValue,self.probTests2[actualNode.depth][a],actualNode.depth+1)
                 self.board.append(newNode)
                 a = a+1
             self.expandTree()
@@ -71,6 +67,7 @@ class HMM():
                 if actualNode.father == None:
                     break
                 actualNode = actualNode.father
+            print("Caminho")
             for tagging in self.path:
                 print(tagging.tag)
 
