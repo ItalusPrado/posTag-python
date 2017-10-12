@@ -1,62 +1,27 @@
 class Data():
 
-    probabilityWords = dict()
-    probabilityWordsLabels = dict()
-
-    countWordLabels = dict()
-    bigrams = dict()
-
-    countWordForLabel = dict() # Contagem de P(X/Y)
-    probabilityWordForLabel = dict() # Probabilidade de P(X/Y)
-
-    totalWords = 0
-
-    def setCountAndProbForLabel(self):
-        for word in self.train:
-            self.setCountForLabel(word[0],word[1])
-        self.setProbForLabel()
-
-
-    def setCountForLabel(self,word,label):
-        if label in self.countWordForLabel:
-            if word in self.countWordForLabel[label]:
-                self.countWordForLabel[label][word] = self.countWordForLabel[label][word] + 1
-            else:
-                self.countWordForLabel[label][word] = 1
-        else:
-            self.countWordForLabel[label] = {word: 1}
-
-    def setProbForLabel(self):
-        for label in self.countWordForLabel:
-            total = 0
-            for word in self.countWordForLabel[label]:
-                total += self.countWordForLabel[label][word]
-            for word in self.countWordForLabel[label]:
-                if label in self.probabilityWordForLabel:
-                        self.probabilityWordForLabel[label][word] = self.countWordForLabel[label][word]/total
-                else:
-                    self.probabilityWordForLabel[label] = {word : self.countWordForLabel[label][word]/total}
-
     word = 0
     tag = 1
 
-    train = dict()
-    test = dict()
+    data = dict()
     organizedBigrams = dict()
     countedBigrams = dict()
     countedLabelsBigrams = dict()
     probabilityLabels = dict()
 
 
-    def __init__(self, file):
-        self.train = self.getSeparatedLines(file)
-        self.organizedBigrams = self.getOrganizedBigrams(self.train)
-        self.countedBigrams = self.getCountedBigrams(self.organizedBigrams)
-        self.countedLabelsBigrams = self.getCountedLabelsBigrams(self.organizedBigrams)
-        self.probabilityLabels = self.getProbabilityLabels(self.countedBigrams, self.countedLabelsBigrams)
+    def __init__(self, file, type):
+        self.data = self.getSeparatedLines(file)
 
-    def setTest(self, test):
-        self.test = test
+        if type == 'train':
+            self.organizedBigrams = self.getOrganizedBigrams(self.data)
+            self.countedBigrams = self.getCountedBigrams(self.organizedBigrams)
+            self.countedLabelsBigrams = self.getCountedLabelsBigrams(self.organizedBigrams)
+            self.probabilityLabels = self.getProbabilityLabels(self.countedBigrams, self.countedLabelsBigrams)
+
+
+    def getTestData(self):
+        return self.data
 
     def getSeparatedLines(self, file):
         empty = 'empty_EMPTY'
@@ -80,6 +45,8 @@ class Data():
                 array.append(newList)
 
             dictionary[i] = array
+
+        print(dictionary)
 
         return dictionary
 
@@ -146,56 +113,3 @@ class Data():
         print(dictionary)
 
         return dictionary
-
-
-
-#################### ANTIGO TUDO QUE ESTÁ ABAIXO #################
-
-    # Talvez seja inutil
-    def addCountWord(self,word):
-        self.totalWords += 1
-        if not self.probabilityWords.__contains__(word):
-            self.probabilityWords[word] = 1
-        else:
-            self.probabilityWords[word] = self.probabilityWords[word]+1
-
-    # Talvez seja inutil
-    def probForWords(self):
-        for word in self.probabilityWords:
-            self.probabilityWords[word] = self.probabilityWords[word]/self.totalWords
-
-
-    def countLabelForWord(self,word,label):
-        if word in self.countWordLabels:
-            if label in self.countWordLabels[word]:
-                self.countWordLabels[word][label] = self.countWordLabels[word][label]+1
-            else:
-                self.countWordLabels[word][label] = 1
-        else:
-            self.countWordLabels[word] = {label: 1}
-
-    def probabilityLabelForWord(self):
-        for word in self.countWordLabels:
-            total = self.probabilityWords[word]
-            for label in self.countWordLabels[word]:
-                if word in self.probabilityWordsLabels:
-                    self.probabilityWordsLabels[word][label] = self.countWordLabels[word][label]/total
-                else:
-                    self.probabilityWordsLabels[word] = {label: self.countWordLabels[word][label]/total}
-
-
-
-    # def viterbi(self,sentence):
-    #     words = sentence.split(' ')
-    #     for word in words:
-
-
-
-
-    # def probabilityForLabels(self, words, label):
-    #     for word in words:
-    #         probabilityLabels = dict()
-    #         for label in labels:
-    #             #calcular a probabilidade das labels
-    #             probabilityLabels[label] = 0.2
-    #         self.probabilityWordsLabels[word] = probabilityLabels
