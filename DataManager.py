@@ -10,7 +10,6 @@ class DataManager():
     def separateLines(self, file):
         array = []
         content = file.readlines()
-        print(len(content))
         for i in range(0, len(content)):
             line = content[i].splitlines()
             for j in range(0, len(line)):
@@ -24,7 +23,6 @@ class DataManager():
         return array
 
     def setCountAndProbForLabel(self):
-        print(self.data)
         for word in self.data:
            self.setCountForLabel(word[0], word[1])
 

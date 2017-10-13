@@ -34,9 +34,7 @@ class NewHMM():
     def expandTree2(self):
         index = None
         value = None
-        print("expandindo")
         for node in range(0, len(self.board)):
-            print("Borda", self.board[node].currentValue)
             if node == 0:
                 index = 0
                 value = self.board[node].currentValue
@@ -45,7 +43,6 @@ class NewHMM():
                     index = node
                     value = self.board[node].currentValue
 
-        print(index)
         actualNode = self.board[index]
         del self.board[index]
         a = 0
@@ -62,9 +59,13 @@ class NewHMM():
                 if actualNode.father == None:
                     break
                 actualNode = actualNode.father
-            print("Caminho")
-            for tagging in self.path:
-                print(tagging.tag)
+            self.path.pop()
+
+            for word in self.wordToTest:
+                print(word, end=' ')
+            print()
+            for tagging in reversed(self.path):
+                print(tagging.tag, end=' ')
 
 
 

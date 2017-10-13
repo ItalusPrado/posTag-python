@@ -9,8 +9,6 @@ probabilityLabels = trainData.probabilityLabels
 train = open("train.txt", encoding="utf8")
 dataManager = DataManager(train)
 dataManager.setCountAndProbForLabel()
-print(dataManager.countWordForLabel["pcp"])
-print(dataManager.probWordForLabel["n"])
 
 hmm = NewHMM(dataManager.probWordForLabel,probabilityLabels)
 hmm.startSearch()
