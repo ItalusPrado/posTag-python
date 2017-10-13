@@ -16,7 +16,9 @@ class Data():
     probabilityWords = dict()
     tags = Tag().all()
 
-
+    testData = dict()
+    arrayWords = []
+    arrayLabels = []
 
     def __init__(self, file):
         self.data = self.getSeparatedLines(file)
@@ -25,6 +27,22 @@ class Data():
         self.countedBigrams = self.getCountedBigrams(self.organizedBigrams)
         self.countedLabelsBigrams = self.getCountedLabelsBigrams(self.organizedBigrams)
         self.probabilityLabels = self.getProbabilityLabels(self.countedBigrams, self.countedLabelsBigrams)
+
+    def setTest(self, file):
+        self.test = self.getSeparatedLines(file)
+        self.arrayWords = self.getArray(self.test, self.word)
+        self.arrayLabels = self.getArray(self.test,self.tag)
+
+    def getArray(self, dictionary, type):
+        array = []
+        for i in range(0,len(dictionary)):
+            lineArray = []
+            for bigram in dictionary[i]:
+                lineArray.append(bigram[type])
+
+            array.append(lineArray)
+
+        return array
 
     def getSeparatedLines(self, file):
         empty = 'empty_EMPTY'

@@ -3,21 +3,23 @@ from DataManager import DataManager
 from NewHMM import NewHMM
 
 train = open("train.txt", encoding="utf8")
-trainData = Data(train)
-probabilityLabels = trainData.probabilityLabels
+data = Data(train)
+probabilityLabels = data.probabilityLabels
 
 train = open("train.txt", encoding="utf8")
 dataManager = DataManager(train)
 dataManager.setCountAndProbForLabel()
+
+test = open("test.txt", encoding="utf8")
+data.setTest(test)
+arrayWords = data.arrayWords
+arrayLabels = data.arrayLabels
 
 hmm = NewHMM(dataManager.probWordForLabel,probabilityLabels)
 
 while True:
     word = input("\n\nPut a phrase: ").split(" ")
     hmm.startSearch(word)
-
-
-
 
 
 # from HMM import HMM
