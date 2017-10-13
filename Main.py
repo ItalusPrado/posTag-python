@@ -14,6 +14,7 @@ test = open("test.txt", encoding="utf8")
 data.setTest(test)
 arrayWords = data.arrayWords
 arrayLabels = data.arrayLabels
+print(arrayWords)
 
 hmm = NewHMM(dataManager.probWordForLabel,probabilityLabels)
 

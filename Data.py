@@ -40,6 +40,8 @@ class Data():
             for bigram in dictionary[i]:
                 lineArray.append(bigram[type])
 
+            lineArray.remove(lineArray[0])
+            lineArray.remove(lineArray[len(lineArray)-1])
             array.append(lineArray)
 
         return array
