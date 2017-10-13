@@ -9,7 +9,7 @@ class NewHMM():
     board = []
     path = []
 
-    wordToTest = ["eu","quero","passar","professor","me","deixa","passar"]
+    wordToTest = None#["eu","quero","passar","professor","me","deixa","passar"]
     tags = ['pcp','pden','cur','prep','prep+prosub','ks','adv-ks','prep+adv','pro-ks','num','prosub','adv','proadj','nprop','pu','propess','prep+art','adj','v','n','art','prep+propess','in','prep+pro-ks','prep+proadj','kc']
 
     probYforY = None
@@ -26,8 +26,11 @@ class NewHMM():
             self.word.append(separated[0])
             self.tag.append(separated[1])
 
-    def startSearch(self):
+    def startSearch(self,phrase):
         node = Node(None,'empty',1,1,1,0)
+        self.wordToTest = phrase
+        self.path = []
+        self.board = []
         self.board.append(node)
         self.expandTree2()
 

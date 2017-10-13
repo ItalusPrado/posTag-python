@@ -11,7 +11,11 @@ dataManager = DataManager(train)
 dataManager.setCountAndProbForLabel()
 
 hmm = NewHMM(dataManager.probWordForLabel,probabilityLabels)
-hmm.startSearch()
+
+while True:
+    word = input("\n\nPut a phrase: ").split(" ")
+    hmm.startSearch(word)
+
 
 
 
