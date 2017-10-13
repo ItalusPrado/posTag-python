@@ -5,15 +5,14 @@ from NewHMM import NewHMM
 train = open("train.txt", encoding="utf8")
 trainData = Data(train)
 probabilityLabels = trainData.probabilityLabels
-print(probabilityLabels)
 
-train = open("test.txt", encoding="utf8")
+train = open("train.txt", encoding="utf8")
 dataManager = DataManager(train)
 dataManager.setCountAndProbForLabel()
 print(dataManager.countWordForLabel["pcp"])
-# print(dataManager.probWordForLabel["n"])
+print(dataManager.probWordForLabel["n"])
 
-hmm = NewHMM(dataManager.probWordForLabel)
+hmm = NewHMM(dataManager.probWordForLabel,probabilityLabels)
 hmm.startSearch()
 
 

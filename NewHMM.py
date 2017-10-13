@@ -9,13 +9,15 @@ class NewHMM():
     board = []
     path = []
 
-    wordToTest = ["vai","se","foder"]
+    wordToTest = ["eu","quero","passar","professor","me","deixa","passar"]
     tags = ['pcp','pden','cur','prep','prep+prosub','ks','adv-ks','prep+adv','pro-ks','num','prosub','adv','proadj','nprop','pu','propess','prep+art','adj','v','n','art','prep+propess','in','prep+pro-ks','prep+proadj','kc']
 
+    probYforY = None
     probXforY = None
 
-    def __init__(self,probxy):
+    def __init__(self,probxy,probyy):
         self.probXforY = probxy
+        self.probYforY = probyy
 
     def separateText(self):
         for word in self.text.split(' '):
@@ -49,9 +51,9 @@ class NewHMM():
         a = 0
         if actualNode.depth < len(self.wordToTest):
             for tag in self.tags:
-                if self.wordToTest[actualNode.depth] in self.probXforY[tag]:
-                    print(tag)
-                    newNode = Node(actualNode, tag, 1, actualNode.currentValue,self.probXforY[tag][self.wordToTest[actualNode.depth]], actualNode.depth + 1)
+                key = "%s,%s/%s" % (actualNode.tag.upper(), tag.upper(), actualNode.tag.upper())
+                if self.wordToTest[actualNode.depth] in self.probXforY[tag] and key in self.probYforY :
+                    newNode = Node(actualNode, tag, self.probYforY[key], actualNode.currentValue,self.probXforY[tag][self.wordToTest[actualNode.depth]], actualNode.depth + 1)
                     self.board.append(newNode)
             self.expandTree2()
         else:
